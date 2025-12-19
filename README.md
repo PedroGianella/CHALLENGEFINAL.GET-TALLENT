@@ -42,3 +42,8 @@ El sistema está compuesto por tres partes principales:
 - **ChromaDB** (Base de datos vectorial)
 - **HTML / CSS / JavaScript** (Frontend simple)
 - **Arquitectura RAG con grounding**
+
+## Documentación
+La documentación completa del proyecto se encuentra en el archivo:
+- Documentacion_RAG_Talleres.pdf
+
