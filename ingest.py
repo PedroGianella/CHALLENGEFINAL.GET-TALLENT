@@ -5,9 +5,7 @@ import cohere
 import chromadb
 from chromadb.config import Settings
 
-# -----------------------------
 # Configuración
-# -----------------------------
 load_dotenv()
 
 COHERE_API_KEY = os.getenv("COHERE_API_KEY")
@@ -26,9 +24,8 @@ chroma_client = chromadb.PersistentClient(
     settings=Settings(anonymized_telemetry=False)
 )
 
-# -----------------------------
-# Chunking (mejorado)
-# -----------------------------
+
+# Chunking 
 def chunk_text(text: str, chunk_size: int = 600, overlap: int = 200):
     chunks = []
     start = 0
@@ -39,9 +36,8 @@ def chunk_text(text: str, chunk_size: int = 600, overlap: int = 200):
     return chunks
 
 
-# -----------------------------
+
 # Lectura del TXT
-# -----------------------------
 TXT_FILE = "talleres.txt"
 with open(TXT_FILE, "r", encoding="utf-8") as f:
     full_text = f.read()
@@ -53,9 +49,8 @@ if len(full_text) < 100_000:
 chunks = chunk_text(full_text, chunk_size=900, overlap=200)
 print(f"[INFO] Total de chunks: {len(chunks)}")
 
-# -----------------------------
-# Reiniciar colección (FORMA CORRECTA)
-# -----------------------------
+
+# Reiniciar colección
 print("[INFO] Reiniciando colección en Chroma...")
 try:
     chroma_client.delete_collection(COLLECTION_NAME)
@@ -67,9 +62,8 @@ collection = chroma_client.get_or_create_collection(
     metadata={"hnsw:space": "cosine"}
 )
 
-# -----------------------------
+
 # Embeddings
-# -----------------------------
 print("[INFO] Generando embeddings con Cohere...")
 
 embed_resp = co.embed(
@@ -82,7 +76,7 @@ embeddings = embed_resp.embeddings
 ids = [f"chunk_{i}" for i in range(len(chunks))]
 metadatas = [{"source": TXT_FILE, "chunk_index": i} for i in range(len(chunks))]
 
-# Guardado por partes (por si son muchos chunks)
+# Guardado por partes
 BATCH = 96
 for i in range(0, len(chunks), BATCH):
     j = i + BATCH
@@ -95,3 +89,4 @@ for i in range(0, len(chunks), BATCH):
     print(f"[INFO] Guardados {min(j, len(chunks))} / {len(chunks)} chunks")
 
 print(f"[SUCCESS] Base vectorial lista (persistente) en: {CHROMA_PATH}")
+
