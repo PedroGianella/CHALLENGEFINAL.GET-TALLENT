@@ -45,7 +45,7 @@ body {
   opacity: 0.95;
 }
 
-/* ===== Launcher (escudo) ===== */
+
 .launcher {
   position: fixed;
   right: 22px;
@@ -67,10 +67,10 @@ body {
   object-fit: contain;
 }
 
-/* ===== Chat window (sale del escudo) ===== */
+
 .chat {
   position: fixed;
-  right: 112px;     /* “sale” hacia la izquierda desde el escudo */
+  right: 112px;     
   bottom: 22px;
   width: min(380px, calc(100vw - 160px));
   height: 520px;
@@ -84,7 +84,7 @@ body {
   z-index: 20;
 }
 
-/* Pico que apunta al escudo */
+
 .chat::after {
   content: "";
   position: absolute;
@@ -175,3 +175,4 @@ body {
   opacity: 0.75;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
+
