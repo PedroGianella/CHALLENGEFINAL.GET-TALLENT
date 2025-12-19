@@ -1,0 +1,177 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #0b0f17;
+  color: #e9eef7;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  background: rgba(15, 21, 34, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 16px 20px;
+  z-index: 5;
+}
+
+.brand { display: flex; flex-direction: column; gap: 4px; }
+.brand-title { font-weight: 700; font-size: 16px; }
+.brand-subtitle { font-size: 12px; opacity: 0.8; }
+
+.content {
+  padding: 24px 20px 120px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.hero {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 22px;
+}
+.hero h1 { margin: 0 0 8px; font-size: 22px; }
+.hero p { margin: 0 0 16px; opacity: 0.9; line-height: 1.4; }
+
+.tips { display: grid; gap: 10px; }
+.tip {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 13px;
+  opacity: 0.95;
+}
+
+/* ===== Launcher (escudo) ===== */
+.launcher {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  z-index: 20;
+}
+.launcher img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ===== Chat window (sale del escudo) ===== */
+.chat {
+  position: fixed;
+  right: 112px;     /* “sale” hacia la izquierda desde el escudo */
+  bottom: 22px;
+  width: min(380px, calc(100vw - 160px));
+  height: 520px;
+  background: rgba(15, 21, 34, 0.95);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 20;
+}
+
+/* Pico que apunta al escudo */
+.chat::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  bottom: 26px;
+  width: 20px;
+  height: 20px;
+  background: rgba(15, 21, 34, 0.95);
+  border-right: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  transform: rotate(-45deg);
+}
+
+.hidden { display: none; }
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.chat-title { font-weight: 700; font-size: 14px; }
+.chat-close {
+  border: none;
+  background: transparent;
+  color: #e9eef7;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.chat-messages {
+  padding: 12px;
+  overflow: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.msg {
+  max-width: 90%;
+  padding: 10px 10px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.35;
+  border: 1px solid rgba(255,255,255,0.08);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.msg.user {
+  align-self: flex-end;
+  background: rgba(255,255,255,0.06);
+}
+.msg.bot {
+  align-self: flex-start;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.chat-input input {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: #e9eef7;
+  outline: none;
+}
+.chat-input button {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.10);
+  color: #e9eef7;
+  cursor: pointer;
+}
+
+.chat-footer {
+  padding: 10px 12px;
+  font-size: 11px;
+  opacity: 0.75;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}

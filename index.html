@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Asistente Talleres</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-title">Asistente de Talleres</span>
+      <span class="brand-subtitle">Consultas basadas en la base de conocimiento</span>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="hero">
+      <h1>Consultá sobre Club Atlético Talleres</h1>
+      <p>
+        Escribí tu pregunta en el chat. El asistente responde solo con información del contexto cargado.
+      </p>
+      <div class="tips">
+        <div class="tip"><strong>Ejemplo:</strong> “¿Cuál es la historia del clásico Talleres vs Belgrano?”</div>
+        <div class="tip"><strong>Ejemplo:</strong> “¿Qué dice el documento sobre el estadio?”</div>
+        <div class="tip"><strong>Ejemplo:</strong> “¿Qué campañas destacadas aparecen en el texto?”</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Botón/escudo (launcher) -->
+  <button id="launcher" class="launcher" aria-label="Abrir chat">
+    <img src="../TALLERES.jpg" alt="Escudo Talleres" />
+  </button>
+
+  <!-- Ventana de chat (sale del escudo) -->
+  <section id="chat" class="chat hidden" aria-label="Chat del asistente">
+    <div class="chat-header">
+      <div class="chat-title">Asistente</div>
+      <button id="closeChat" class="chat-close" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div id="messages" class="chat-messages" role="log" aria-live="polite"></div>
+
+    <form id="chatForm" class="chat-input">
+      <input
+        id="questionInput"
+        type="text"
+        placeholder="Escribí tu consulta..."
+        autocomplete="off"
+        required
+      />
+      <button id="sendBtn" type="submit">Enviar</button>
+    </form>
+
+    <div class="chat-footer">
+      Responde en español y sin emojis. Si no hay contexto suficiente, lo indica.
+    </div>
+  </section>
+
+  <script src="./app.js"></script>
+</body>
+</html>
