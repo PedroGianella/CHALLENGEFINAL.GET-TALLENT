@@ -55,7 +55,7 @@ chatForm.addEventListener("submit", async (e) => {
 
     const data = await resp.json();
 
-    // Tu API devuelve: { answer, context_used, similarity_score, grounded }
+  
     const answer = (data && data.answer) ? data.answer : "No pude obtener respuesta.";
     addMessage(answer, "bot");
   } catch (err) {
@@ -65,3 +65,4 @@ chatForm.addEventListener("submit", async (e) => {
     questionInput.focus();
   }
 });
+
