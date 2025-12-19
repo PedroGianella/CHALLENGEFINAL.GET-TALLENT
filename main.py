@@ -215,7 +215,7 @@ def ask(req: AskRequest):
         ANSWER_CACHE[question] = resp
         return resp
 
-    #Generación (corto y controlado)
+    #Generación
     context = context[:MAX_CONTEXT_CHARS]
     prompt = build_prompt(context, question)
 
@@ -240,4 +240,5 @@ def ask(req: AskRequest):
     )
     ANSWER_CACHE[question] = resp
     return resp
+
 
