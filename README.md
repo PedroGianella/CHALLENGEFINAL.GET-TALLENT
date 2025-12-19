@@ -45,5 +45,6 @@ El sistema está compuesto por tres partes principales:
 
 ## Documentación
 La documentación completa del proyecto se encuentra en el archivo:
-- Documentacion_RAG_Talleres.pdf
+- Documentacion_RAG_Talleres
+
 
