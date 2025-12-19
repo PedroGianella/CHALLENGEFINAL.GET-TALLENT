@@ -118,7 +118,7 @@ def retrieve_context(query: str, top_k: int = TOP_K) -> Tuple[str, Optional[floa
 
     context = "\n\n---\n\n".join(docs)
     return context, best_sim
-
+#PROMPT
 def build_prompt(context: str, question: str) -> str:
     return f"""
 Sos un asistente especializado EXCLUSIVAMENTE en información del Club Atlético Talleres de Córdoba.
@@ -156,17 +156,17 @@ def cohere_chat_generate(prompt: str) -> str:
         )
         return resp.message.content[0].text.strip()
     except TypeError:
-        # SDK viejo
+      
         resp = co.chat(
             model=CHAT_MODEL,
             temperature=0,
             message=prompt,
         )
-        # En SDK viejo suele venir resp.text
+       
         text = getattr(resp, "text", None)
         if text:
             return text.strip()
-        # fallback por si cambia la estructura
+        
         return str(resp).strip()
 
 
@@ -179,7 +179,7 @@ def ask(req: AskRequest):
     if question in ANSWER_CACHE:
         return ANSWER_CACHE[question]
 
-    # 1) Filtro lenguaje
+    #Filtro lenguaje
     if is_inappropriate(question):
         resp = AskResponse(
             answer="No puedo responder a este tipo de consultas.",
@@ -190,7 +190,7 @@ def ask(req: AskRequest):
         ANSWER_CACHE[question] = resp
         return resp
 
-    # 2) Recuperación
+    #Recuperación
     try:
         context, best_sim = retrieve_context(question, top_k=TOP_K)
     except Exception as e:
@@ -204,7 +204,7 @@ def ask(req: AskRequest):
         ANSWER_CACHE[question] = resp
         return resp
 
-    # 3) Grounding: si no hay contexto o similitud baja
+    #Grounding: si no hay contexto o similitud baja
     if (not context) or (best_sim is None) or (best_sim < SIMILARITY_THRESHOLD):
         resp = AskResponse(
             answer="No cuento con información suficiente para responder a esta consulta.",
@@ -215,7 +215,7 @@ def ask(req: AskRequest):
         ANSWER_CACHE[question] = resp
         return resp
 
-    # 4) Generación (corto y controlado)
+    #Generación (corto y controlado)
     context = context[:MAX_CONTEXT_CHARS]
     prompt = build_prompt(context, question)
 
@@ -240,3 +240,4 @@ def ask(req: AskRequest):
     )
     ANSWER_CACHE[question] = resp
     return resp
+
